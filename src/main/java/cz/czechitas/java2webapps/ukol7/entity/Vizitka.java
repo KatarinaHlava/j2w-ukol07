@@ -49,7 +49,7 @@ public class Vizitka {
     private String web;
 
 
-    private String celaAdresa;
+
 
     public Vizitka() {
     }
@@ -65,14 +65,12 @@ public class Vizitka {
         this.email = email;
         this.telefon = telefon;
         this.web = web;
-        this.celaAdresa= ulice+ " " +psc + " "+ obec;
+
     }
 
     public String getCelaAdresa() {
-         if (celaAdresa != null) {
-            return celaAdresa;
-        }
-        celaAdresa= ulice+ " " +psc + " "+ obec;
+
+       String celaAdresa= ulice+ " " +psc + " "+ obec;
        return  celaAdresa;
     }
 
