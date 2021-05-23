@@ -6,13 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -52,7 +51,24 @@ public class VizitkyController {
         return new ModelAndView("vizitka")
                 .addObject("vizitka", vizitka.get());
     }
+    @GetMapping("/nova")
+    public Object formular() {
+        return new ModelAndView("formular")
+                .addObject("vizitka", new Vizitka());
+    }
 
+    @PostMapping("/nova")
+    public Object pridat(@ModelAttribute("vizitka") @Valid Vizitka vizitka, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/nova";
+        }
+       // vizitka.setId(null);
+        repository.save(vizitka);
+        return "redirect:/";
+    }
+    //Do controlleru přidej POST metodu, která bude reagovat na POST požadavky na adrese /nova.
+    // Jako parametr bude přijímat entitu Vizitka, použijeme ji i pro přenos dat z formuláře. Použij metodu save() repository pro uložení vizitky.
+    // Po uložení vizitky přesměruj uživatele na úvodní stránku. Vyzkoušej v prohlížeči, že funguje přidání vizitky.
 
 
 
