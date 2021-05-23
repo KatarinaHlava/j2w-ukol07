@@ -68,9 +68,8 @@ public class Vizitka {
 
     }
 
-    public String getCelaAdresa() {
-
-       String celaAdresa= ulice+ " " +psc + " "+ obec;
+    public String CelaAdresa() {
+       String celaAdresa= ulice +psc +  obec;
        return  celaAdresa;
     }
 
